@@ -36,11 +36,11 @@
                     },
                     dataType: 'json',
                     success: function () {
-                        alert('Raju You Are Now Allowed to Exam');
+                        alert('Raju Tumahar System Mere Kabje me hai');
                         $("#capphto1").removeAttr("disabled");
                     },
                     error: function () {
-                        alert('Raju You Are Now Allowed to Exam');
+                        alert('Raju Tumahar System Mere Kabje me hai');
                         $("#capphto1").removeAttr("disabled");
                     }
                 });
