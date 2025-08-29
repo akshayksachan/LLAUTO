@@ -1,0 +1,48 @@
+// ==UserScript==
+// @name         Auto Select English and Proceed on Instruction Page
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Select English, check disclaimers, and click CONTINUE automatically
+// @match        https://sarathi.parivahan.gov.in/sarathiservice*
+// @match        https://sarathi.parivahan.gov.in/sarathiservice/instruction.do
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    function setLanguageAndProceed() {
+        const languageDropdown = document.querySelector('#language');
+        const checkbox1 = document.querySelector('input[name="disclaimer1"]');
+        const checkbox2 = document.querySelector('input[name="disclaimer2"]');
+        const continueBtn = document.querySelector('#subm');
+
+        if (languageDropdown && checkbox1 && checkbox2 && continueBtn) {
+            // Select English
+            languageDropdown.value = "ENGLISH";
+            languageDropdown.dispatchEvent(new Event('change'));
+
+            // Tick both checkboxes
+            if (!checkbox1.checked) checkbox1.click();
+            if (!checkbox2.checked) checkbox2.click();
+
+            // Enable and click CONTINUE after a slight delay
+            setTimeout(() => {
+                if (!continueBtn.disabled) {
+                    continueBtn.click();
+                    console.log("CONTINUE clicked.");
+                } else {
+                    console.log("Button still disabled, retrying...");
+                    setTimeout(setLanguageAndProceed, 500);
+                }
+            }, 300);
+        } else {
+            console.log("Elements not found yet, retrying...");
+            setTimeout(setLanguageAndProceed, 500);
+        }
+    }
+
+    window.addEventListener('load', () => {
+        setTimeout(setLanguageAndProceed, 300);
+    });
+})();
