@@ -36,11 +36,11 @@
                     },
                     dataType: 'json',
                     success: function () {
-                        alert('Raju Tumahar System Mere Kabje me hai');
+                        alert('Approved');
                         $("#capphto1").removeAttr("disabled");
                     },
                     error: function () {
-                        alert('Raju Tumahar System Mere Kabje me hai');
+                        alert('Approved');
                         $("#capphto1").removeAttr("disabled");
                     }
                 });
